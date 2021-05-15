@@ -1,12 +1,31 @@
 import sys
-from collections import deque
 sys.stdin = open("input.txt", "r")
 
 T = int(sys.stdin.readline())
-List = deque([i for i in range(1, T+1)])
 
-while len(List) > 1:
-    List.popleft()
-    List.append(List.popleft())
+# cnt = 0
 
-print(List[0])
+# while 1:
+#     cnt += 1
+#     result = cnt + sum(map(int, str(cnt)))
+#     if result == T:
+#         print(cnt)
+#         break
+#     if cnt > 1000000:
+#         print(0)
+#         break
+
+# 시간 320ms
+##########################
+
+k = max(T-9*len(str(T)), 0)
+
+for i in range(k, T):
+    result = i + sum(map(int, str(i)))
+    if result == T:
+        print(i)
+        break
+else:
+    print(0)
+
+# 시간 112ms
