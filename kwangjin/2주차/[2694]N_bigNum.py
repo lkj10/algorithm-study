@@ -5,6 +5,7 @@ T = int(input())
 
 for _ in range(T):
     List = list(map(int, input().split()))
-    List.sort(reverse=True)
-    print(List[2])
+    print(List)
+    #List.sort(reverse=True)
+    #print(List[2])
  
