@@ -8,34 +8,38 @@ for _ in range(T):
     MAX_List = list()
     MIN_List = list()
     dic = {}
-    result = list()
-    temp = 0
+
     for i in range(k):
         M, N = map(str, input().split())
         if M == 'I':
-            heapq.heappush(MAX_List, -int(N))
-            heapq.heappush(MIN_List, int(N))
-            dic[int(N)] = 1
+            heapq.heappush(MAX_List, (-int(N), i))
+            heapq.heappush(MIN_List, (int(N), i))
+            dic[i] = 1
         elif M == 'D':
-            if len(MAX_List) == 0 or len(MIN_List) == 0 :
-                continue
             if int(N) == 1:
-                temp = heapq.heappop(MAX_List)*-1
-                dic[temp] = 0
+                while MAX_List and dic[MAX_List[0][1]] == 0:
+                    heapq.heappop(MAX_List)
+                if MAX_List:
+                    dic[MAX_List[0][1]] = 0
+                    heapq.heappop(MAX_List)
             elif int(N) == -1:
-                temp = heapq.heappop(MIN_List)
-                dic[temp] = 0
-            # if len(MAX_List) == 0 or len(MIN_List) == 0 :
-            #     MAX_List.clear()
-            #     MIN_List.clear()
-    for idx, val in dic.items():
-        if val == 1:
-            result.append(idx)
-            
-    if len(result) > 1 :
-        print(max(result), min(result))
+                while MIN_List and dic[MIN_List[0][1]] == 0:
+                    heapq.heappop(MIN_List)
+                if MIN_List:
+                    dic[MIN_List[0][1]] = 0
+                    heapq.heappop(MIN_List)
+
+    while MAX_List and dic[MAX_List[0][1]] == 0:
+        heapq.heappop(MAX_List)
+    while MIN_List and dic[MIN_List[0][1]] == 0:
+        heapq.heappop(MIN_List)
+
+    if MAX_List and MIN_List :
+        print(heapq.heappop(MAX_List)[0]*-1, heapq.heappop(MIN_List)[0])
     else:
         print("EMPTY")
+
+
 
 
 
