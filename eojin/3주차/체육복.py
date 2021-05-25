@@ -1,24 +1,37 @@
-def solution(name):
-    make_name = [min(ord(i) - ord("A"), ord("Z") - ord(i)+1) for i in name]
-    print(make_name)
+def solution(n, lost, reserve):
+    answer = 0
+    array = [0] * 30
+    for i in range(n):
+        array[i] = 1
+    for i in lost:
+        array[i - 1] -= 1
 
-    idx, answer = 0, 0
-    while True:
-        answer += make_name[idx]
-        make_name[idx] = 0
-        if sum(make_name) ==0:
-            break
-        left, right = 1, 1
-        while make_name[idx - left] ==0:
-            left +=1
-        while make_name[idx + right] ==0:
-            right +=1
+    for i in reserve:
+        array[i - 1] += 1
 
-        if left<right:
-            answer+=left
-            idx += -left
-        else:
-            answer+=right
-            idx += right
+    for i in range(n):
+        if array[i] > 1:
+
+            # 양 옆이 0인 경우
+            if i + 1 < n and array[i + 1] == 0 and i - 1 >= 0 and array[i - 1] == 0:
+                if i + 2 < n and array[i + 2] > 1:
+                    if array[i - 1] == 0 and array[i] > 1:
+                        array[i - 1] = 1
+                        array[i] = 1
+
+            # 한쪽만 0 인 경우
+            if i - 1 >= 0 and array[i - 1] == 0:
+                if array[i - 1] == 0 and array[i] > 1:
+                    array[i - 1] = 1
+                    array[i] = 1
+
+            if i + 1 < n and array[i + 1] == 0:
+                if array[i + 1] == 0 and array[i] > 1:
+                    array[i + 1] = 1
+                    array[i] = 1
+
+    for i in array:
+        if i:
+            answer += 1
 
     return answer
