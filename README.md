@@ -1,8 +1,10 @@
 # Algorithm Study
 
+### 남은 기간 열심히 해서 좋은 성과 얻어요 ~~!!
+
 ## 💖 1. What
 
-Baekjoon, Programmers leetcode 등에서 Baekjoon 기준 from 실버 to 골드인 문제를 선별해서 풉니다. 
+`Baekjoon`, `Programmers` `leetcode` 등에서 Baekjoon 기준 from 실버 to 골드인 문제를 선별해서 풉니다. 
 
 <h4>
     <a href="https://www.notion.so/ca0b8a585bf945a69ae852058ff69773">
@@ -21,8 +23,10 @@ Baekjoon, Programmers leetcode 등에서 Baekjoon 기준 from 실버 to 골드�
 </h4>
 
 ## 😈 2.  How
--`Pull Request` 자기 계정으로 해당 Repository fork 하기
-- 매 주 돌아가며 한 명씩 내고 싶은 문제 추려내 제출하기
+
+  `Pull Request`로 자신이 푼 문제를 제출 해요.
+
+- 매 주 돌아가며 한 명씩 내고 싶은 문제 추려 내 제출하기
 - 화요일 3문제 목요일 2문제
 - 화요일에 전체 오프라인 리뷰하기
 - 목요일 줌, 행 아웃을 통한 온라인 실시간 리뷰하기
@@ -77,11 +81,11 @@ git commit -m "feat : 4weeks programmers progresses solved"
 
 #### 자신이 푼 문제 유형을 자신의 pull request에 label을 붙입니다.
 
-#### 라벨은 직접 만들어서 사용하면 됩니다. ex) Brute-Force, DFS, BFS
+#### 라벨은 직접 만들어서 사용하면 됩니다. `ex) Brute-Force, DFS, BFS`
 
-#### 자신의 pull request의 assignee에 자신을 추가합니다.
+#### 자신의 pull request의 `assignee`에 자신을 추가합니다.
 
-#### 자신이 받고 싶은 review 받고 싶은 reviewr가 있을 경우, 자신의 pull request에 reviewer로 추가합니다.
+#### 자신이 받고 싶은 review 받고 싶은 `reviewer`가 있을 경우, 자신의 pull request에 `reviewer`로 추가합니다.
 
 #### 기존에 Pull Request를 작성했지만 새로운 문제를 풀었을 경우, 새로운 문제에 대한 commit을 하기 전 다음과 같은 과정을 수행하는 것을 지향합니다.
 
@@ -100,7 +104,7 @@ git commit -m "feat : 4weeks programmers progresses solved"
 윤장원 : boj 2160 BFS, DFS 미로 찾기
 ```
 
-2. 자신이 작성했던 Pull Request에서 초록색 merge버튼을 눌러서 merge합니다.
+2. 자신이 작성했던 Pull Request에서 초록색 `merge`버튼을 눌러서 `merge`합니다.
 
 3. 자신이 작성했던 Pull Request에서 issue로 앞서 생성한 이슈를 연결합니다. 이슈는 닫히지 않았는지 확인합니다.
 
