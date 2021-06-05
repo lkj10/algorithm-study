@@ -7,17 +7,17 @@
 `Baekjoon`, `Programmers` `leetcode` 등에서 Baekjoon 기준 from 실버 to 골드인 문제를 선별해서 풉니다. 
 
 <h4>
-    <a href="https://www.notion.so/ca0b8a585bf945a69ae852058ff69773">
+    <a href="https://www.notion.so/ca0b8a585bf945a69ae852058ff69773" target='_blank'>
         😎 이번 주 풀어야할 문제 보러가기
     </a>
 </h4>
 <h4>
-    <a href="https://www.notion.so/23e643615b494706b7ddcf1bf0b055ff"> 
+    <a href="https://www.notion.so/23e643615b494706b7ddcf1bf0b055ff" target='_blank'> 
         😗 풀고 싶은 문제 추천하러 가기 
     </a>
 </h4>
 <h4>
-    <a href="https://www.notion.so/07e03c54c65d4753822f93f860d02ec6?v=6f341b068d0c499db287871823708e35"> 
+    <a href="https://www.notion.so/07e03c54c65d4753822f93f860d02ec6?v=6f341b068d0c499db287871823708e35" target='_blank'> 
         😗 건의 하러 가기 ~~
     </a>
 </h4>
