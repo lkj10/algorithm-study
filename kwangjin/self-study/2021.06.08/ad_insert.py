@@ -1,46 +1,45 @@
 def solution(play_time, adv_time, logs):
     answer = ''
-    logs_List = list()
-    
+
     play_HH, play_MM, play_SS = map(int, play_time.split(':'))
-    play_time_List = [0, play_HH*3600+play_MM*60+play_SS]
-    logs_List = list([play_time_List])
-    
     adv_HH, adv_MM, adv_SS = map(int, adv_time.split(':'))
-    adv_time_List = [0, adv_HH*3600+adv_MM*60+adv_SS]
-    
-    MAX = 0
-    
-    
+    adv_SS += adv_HH*3600 + adv_MM * 60
+    List = [0] * (play_HH*3600 + play_MM * 60 + play_SS)
+    List_MAX = [0] * (play_HH*3600 + play_MM * 60 + play_SS - adv_SS)
+    result = 0
+    MAX, idx = 0, 0
+
     for i in logs:
-        start_time , end_time = map(str, i.split('-'))
+        start_time, end_time = map(str, i.split('-'))
         start_HH, start_MM, start_SS = map(int, start_time.split(':'))
         end_HH, end_MM, end_SS = map(int, end_time.split(':'))
-        logs_List.append([start_HH*3600+start_MM*60+start_SS, end_HH*3600+end_MM*60+end_SS])
-        
-    for i in range(len(logs_List)):
-        #두가지 경우로 나눈다. 1. end_time에서 플레이 시간을 뺀거 2. start_time에서 더한거. 그걸 temp_start, temp_end로 변수를 지정.
-        #case 1
-        temp_start = logs_List[i][0]
-        temp_end = adv_time_List[1] + temp_start
-        SUM_start = 0
-        for j in range(len(logs_List)):
-            if temp_end >= logs_List[j][0] >= temp_start: # logs_start 가 adv_time 안에 있을 경우
-                if temp_end >= logs_List[j][1]: # adv_time보다 작을 경우
-                    SUM_start += logs_List[j][1] - logs_List[j][0]
-                elif logs_List[j][1] > temp_end :#adv_time보다 클 경우
-                    SUM_start += temp_end - logs_List[j][0]
-                    
-            elif temp_start >= logs_List[j][0] and temp_end >= logs_List[j][1]: # log_start는 밖에 있지만 log_end가 안에 있을 경우
-                SUM_start += temp_end - temp_start
-                
-            elif temp_start >= logs_List[j][0] and logs_List[j][1] >= temp_end : #log_List가 adv_time을 감싸고 있을 경우
-                SUM_start += temp_start - temp_end
-                
-        print(SUM_start)
-                
+        start_SS += start_HH*3600 + start_MM * 60
+        end_SS += end_HH*3600 + end_MM * 60
+        #print(start_SS, start_time, end_SS, end_time)
+        for j in range(start_SS, end_SS):
+            List[j] += 1
+        # print(sum(List[start_SS:end_SS]))
 
-    # print(logs_List)
-    # print(play_time_List)
-    # print(adv_time_List)
+    # List_MAX[0] = sum(List[:adv_SS])
+    # List_MAX[1] = List_MAX[0] - List[0] + List[adv_SS]
+    # List_MAX[2] = List_MAX[1] - List[1] + List[1+adv_SS]
+    for i in range(1, len(List) - adv_SS):
+        List_MAX[i] = List_MAX[i-1] - List[i-1] + List[adv_SS+i-1]
+        if List_MAX[i] > MAX:
+            MAX = List_MAX[i]
+            idx = i
+
+    if List_MAX:
+        result = idx
+
+    result_HH = result // 3600
+    result_MM = (result - result_HH*3600) // 60
+    result_SS = result - result_HH*3600 - result_MM * 60
+    ##print(result_HH, result_MM, result_SS)
+
+    answer = f"{str(result_HH).zfill(2)}:{str(result_MM).zfill(2)}:{str(result_SS).zfill(2)}"
     return answer
+
+
+print(solution("02:03:55", "00:14:15", ["01:20:15-01:45:14", "00:40:31-01:00:00",
+                                        "00:25:50-00:48:29", "01:30:59-01:53:29", "01:37:44-02:02:30"]))
