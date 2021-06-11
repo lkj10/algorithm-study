@@ -3,19 +3,32 @@ sys.stdin = open("input.txt", "r")
 
 N, r, c = map(int, input().split())
 
-List = [[0]*(2**N) for i in range(2**N)]
-visit = [[0]*(2**N) for i in range(2**N)]
+x_size, y_size = 2**N, 2**N
+x_start, y_start = 0, 0
 
-cnt = 0
+answer = 0
 
-for i in range(2**N):
-    for j in range(2**N):
-        if visit[i][j] == 0: 
-            for k in range(4):
-                List[i + k//2][j + k%2] = cnt + k
-                visit[i + k//2][j + k%2] = 1
-            else:
-                cnt += 4
-                
-print(List[r][c])
-    
+
+def DFS(N):
+    global answer, x_size, y_size, x_start, y_start
+    if N == 1:
+        for i in range(4):
+            if y_start+(i//2) == r and x_start + (i % 2) == c:
+                print(answer)
+
+            answer += 1
+    else:
+        if r >= y_size//2 + y_start:
+            y_start += y_size//2
+            answer += 2**(2*N-1)
+
+        if c >= x_size//2 + x_start:
+            x_start += x_size//2
+            answer += 2**(2*N-2)
+
+        y_size = y_size//2
+        x_size = x_size//2
+        DFS(N-1)
+
+
+DFS(N)
