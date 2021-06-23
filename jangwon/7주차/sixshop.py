@@ -21,6 +21,5 @@ def solution(n,relation):
         answer[row]=count
     return answer[1:]
 
-
 print(solution(5,[[1,2],[4,2],[3,1],[4,5]]))
 print(solution(7,[[1,2],[4,2],[3,1],[4,5],[6,7]]))
