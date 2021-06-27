@@ -1,3 +1,7 @@
+from collections import Counter
+import re
+
+
 def solution(s):
     answer = []
     s = s[2:-2].replace('},{', ' ')
@@ -10,3 +14,8 @@ def solution(s):
         temp = list(set(List[i+1]) - set(List[i]))
         answer.append(temp[0])
     return answer
+
+
+def solution(s):
+    s = Counter(re.findall('\d+', s)).most_common()
+    return list(int(i[0]) for i in s)
