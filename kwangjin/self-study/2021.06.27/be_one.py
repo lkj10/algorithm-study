@@ -1,20 +1,16 @@
 import sys
 sys.stdin = open("input.txt", "r")
 N = int(input())
-cnt = 0
-List = [0]*(N)
-List[1] = 1
-List[2] = 2
-List[3] = 1
-1 2 3 4 5 6 7 8
-1 1 1 2 3 2 3
-
-
-def f(n):
-    if n == 1 or n == 2 or n == 3:
-        return List[n]
+List = [0]*(N+1)
+List[1] = 0
+for i in range(2, N+1):
+    if i % 6 == 0:
+        List[i] = min(List[i//2], List[i//3], List[i-1]) + 1
+    elif i % 3 == 0:
+        List[i] = min(List[i//3], List[i-1]) + 1
+    elif i % 2 == 0:
+        List[i] = min(List[i//2], List[i-1]) + 1
     else:
-        return
+        List[i] = List[i-1] + 1
 
-
-for i in range(N+1):
+print(List[N])
