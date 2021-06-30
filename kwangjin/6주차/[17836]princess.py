@@ -78,6 +78,9 @@ while Q:
             dis[x][y] = dis[tmp[0]][tmp[1]]+1
             Q.append((x, y))
 
+for i in range(M):
+    print(dis[i])
+
 if get_sword == 1:
     sword_Time = N + M + dis[sword_x][sword_y] - 2 - sword_x - sword_y
 
@@ -85,6 +88,8 @@ if dis[N-1][M-1] == 0 and sword_Time > T:
     print('Fail')
 elif dis[N-1][M-1] == 0 and sword_Time <= T:
     print(sword_Time)
+elif dis[N-1][M-1] > T and sword_Time > T:
+    print('Fail')
 else:
     print(min(dis[N-1][M-1], sword_Time))
 
