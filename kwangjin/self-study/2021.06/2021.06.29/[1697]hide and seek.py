@@ -10,11 +10,19 @@ sys.stdin = open("input.txt", "r")
 
 M, N = map(int, input().split())
 
-List = [100001] * (N+2)
+List = [100001] * (100001)
 dq = deque()
 dq.append((M, 0))
 
 while dq:
     temp = dq.popleft()
-    if temp[0] ==
-    if temp[0] > 0 and temp[0]
+    if temp[0] == N:
+        List[temp[0]] = temp[1]
+        break
+    if 100001> temp[0] >= 0 and List[temp[0]] > temp[1]:
+        List[temp[0]] = temp[1]
+        dq.append((temp[0]-1, temp[1]+1))
+        dq.append((temp[0]+1, temp[1]+1))
+        dq.append((temp[0]*2, temp[1]+1))
+
+print(List[N])
