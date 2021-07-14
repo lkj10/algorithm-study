@@ -17,3 +17,5 @@ def solution(msg):
     if tmp:
         answer.append(dic[tmp])
     return answer
+
+print(solution("KAKAO"))
