@@ -12,8 +12,7 @@ def solution(s):
         elif i.isalnum():
             tpStr += i
     count_dict = Counter(num_list)
-    for key, value in count_dict.items():
-        answer.append((key, value))
+    answer = list(count_dict.items())
     answer.sort(key=lambda x: x[1], reverse=True)
     answer = [j[0] for j in answer]
     return answer
