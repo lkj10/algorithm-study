@@ -1,87 +1,91 @@
 import sys
+from collections import deque
 sys.stdin = open("input.txt", "r")
 
-# 왼 오 아 위 함수만들고 dfs
-# 최댓값 저장
-
-MAX = 0
-List = []
 N = int(input())
-
-def dfs(cnt):
-    global MAX, List
-    if cnt == 5:
-        print(List)
-        for y in range(N):
-            for x in range(N):
-                MAX = max(List[y][x], MAX)
-
-        return 
-    for i in range(4):
-        left()
-        dfs(cnt+1)
-        right()
-        dfs(cnt+1)
-        down()
-        dfs(cnt+1)
-        up()
-        dfs(cnt+1)        
-
-
-def left():
-    for y in range(N):
-        for x in range(N-1):
-            if List[y][x] == 0:
-                List[y][x], List[y][x+1] = List[y][x+1], List[y][x]
-
-    for y in range(N):
-        for x in range(N-1):
-            if List[y][x] == List[y][x+1]:
-                List[y][x] = List[y][x]*2
-                List[y][x+1] = 0
-                
-def right():
-    for y in range(N):
-        for x in range(N-1, 0, -1):
-            if List[y][x] == 0:
-                List[y][x], List[y][x-1] = List[y][x-1], List[y][x]
-
-    for y in range(N):
-        for x in range(N-1, 0, -1):
-            if List[y][x] == List[y][x-1]:
-                List[y][x] = List[y][x]*2
-                List[y][x-1] = 0
-
-def down():
-    for x in range(N):
-        for y in range(N-1, 0, -1):
-            if List[y][x] == 0:
-                List[y][x], List[y-1][x] = List[y-1][x], List[y][x]
-
-    for x in range(N):
-        for y in range(N-1, 0, -1):
-            if List[y][x] == List[y-1][x]:
-                List[y][x] = List[y][x]*2
-                List[y-1][x] = 0
-
-def up():
-    for x in range(N):
-        for y in range(N-1):
-            if List[y][x] == 0:
-                List[y][x], List[y+1][x] = List[y+1][x], List[y][x]
-
-    for x in range(N):
-        for y in range(N-1):
-            if List[y][x] == List[y+1][x]:
-                List[y][x] = List[y][x]*2
-                List[y+1][x] = 0
-
-
+arr = []
 for _ in range(N):
-    List.append(list(map(int, input().split())))
-
-dfs(0)
-
-print(MAX)
+    arr.append(list(map(int, input().split())))
 
 
+def move_and_merge(List, dir):
+    if dir == 0: # left
+        for y in range(N):
+            idx = deque()
+            for x in range(N):
+                if List[y][x] == 0:
+                    idx.append(x)
+                elif idx:
+                    List[y][idx.popleft()] = List[y][x]
+                    List[y][x] = 0
+                    idx.append(x)
+
+        for y in range(N):
+            for x in range(N-1):
+                if List[y][x] == List[y][x+1]:
+                    List[y][x] = List[y][x]*2
+                    List[y][x+1] = 0
+
+    if dir == 1: # up
+        for x in range(N):
+            idx = deque()
+            for y in range(N):
+                if List[y][x] == 0:
+                    idx.append(y)
+                elif idx:
+                    List[idx.popleft()][x] = List[y][x]
+                    List[y][x] = 0
+                    idx.append(y)
+
+        for x in range(N):
+            for y in range(N-1):
+                if List[y][x] == List[y+1][x]:
+                    List[y][x] = List[y][x]*2
+                    List[y+1][x] = 0
+
+    if dir == 2: # right
+        for y in range(N):
+            idx = deque()
+            for x in range(N-1, -1, -1):
+                if List[y][x] == 0:
+                    idx.append(x)
+                elif idx:
+                    List[y][idx.popleft()] = List[y][x]
+                    List[y][x] = 0
+                    idx.append(x)
+
+        for y in range(N):
+            for x in range(N-1, 0, -1):
+                if List[y][x] == List[y][x-1]:
+                    List[y][x] = List[y][x]*2
+                    List[y][x-1] = 0
+
+    if dir == 3: # down
+        for x in range(N):
+            idx = deque()
+            for y in range(N-1, -1, -1):
+                if List[y][x] == 0:
+                    idx.append(y)
+                elif idx:
+                    List[idx.popleft()][x] = List[y][x]
+                    List[y][x] = 0
+                    idx.append(y)
+
+        for x in range(N):
+            for y in range(N-1, 0, -1):
+                if List[y][x] == List[y-1][x]:
+                    List[y][x] = List[y][x]*2
+                    List[y-1][x] = 0
+
+
+def dfs(List, level):
+    if level == 5:
+        print(List)
+        return
+
+    for i in range(2):
+        move_and_merge(List, i)
+        dfs(List, level+1)
+
+
+dfs(arr, 0)
