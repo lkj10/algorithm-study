@@ -25,33 +25,27 @@ def firestorm(size):
                     List[yy][xx] = size_temp_List[yy-y][xx-x]
 
     temp_List = copy.deepcopy(List)
-    # for i in List:
-    #     print(i)
-    # print()
+
     for y in range(pow(2, N)):
         for x in range(pow(2, N)):
-            if List[y][x] > 0:
-                cnt = 0
-                for i in range(4):
-                    yy = y + dy[i]
-                    xx = x + dx[i]
-                    if 0 <= yy < pow(2, N) and 0 <= xx < pow(2, N) and List[yy][xx] > 0:
-                        cnt += 1
-                if cnt < 3:
-                    temp_List[y][x] -= 1
+            cnt = 0
+            for i in range(4):
+                yy = y + dy[i]
+                xx = x + dx[i]
+                if 0 <= yy < (pow(2, N)) and 0 <= xx < (pow(2, N)) and List[yy][xx] > 0:
+                    cnt += 1
+            if cnt < 3 and temp_List[y][x] > 0:
+                temp_List[y][x] -= 1
+
     return temp_List
 
 
 for i in cmd_List:
     temp_List = []
-    firestorm(pow(2, i))
     List = copy.deepcopy(firestorm(pow(2, i)))
 
 ans = 0
 Max = 0
-
-for i in List:
-    print(i)
 
 Group = [[0] * pow(2, N) for _ in range(pow(2, N))]
 for y in range(pow(2, N)):
@@ -66,14 +60,12 @@ for y in range(pow(2, N)):
                 for i in range(4):
                     yyy = yy + dy[i]
                     xxx = xx + dx[i]
-                    if 0 <= yyy < pow(2, N) and 0 <= xxx < pow(2, N) and List[yyy][xxx] > 0 and Group[yyy][xxx] == 0:
+                    if 0 <= yyy < (pow(2, N)) and 0 <= xxx < (pow(2, N)) and List[yyy][xxx] > 0 and Group[yyy][xxx] == 0:
                         dq.append([yyy, xxx])
                         Group[yyy][xxx] = 1
                         cnt += 1
             Max = max(cnt, Max)
 
-# for i in List:
-#     print(i)
 
 print(ans)
 print(Max)
