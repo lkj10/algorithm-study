@@ -10,10 +10,14 @@ for _ in range(N):
     if temp == 0:
         if List :
             res = heapq.heappop(List)
-            print(-res)
+            print(res[1])
 
         else:
             print(0)
 
     else:
-        heapq.heappush(List, -temp)
+        if temp < 0 :
+            temp = temp * -1    
+            heapq.heappush(List, (temp, -temp))
+        else:
+            heapq.heappush(List, (temp, temp))
