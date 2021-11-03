@@ -36,7 +36,7 @@ for _ in range(T):
             cnt -= 1
     if cnt < 1:
         print("EMPTY")
-        continue
+        continue    
     while min_hq and dic[min_hq[0][1]] == 0:
         heapq.heappop(min_hq)
     while max_hq and dic[max_hq[0][1]] == 0:
