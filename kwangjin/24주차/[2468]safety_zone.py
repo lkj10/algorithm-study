@@ -10,19 +10,17 @@ dy = [0, -1, 0, 1]
 dx = [-1, 0, 1, 0]
 
 MAX = 0
+
 def bfs(y, x, h):
     dq = deque([(y, x)])
     while dq:
         _y, _x = dq.popleft()
-        
         for i in range(4):
             yy = _y + dy[i]
             xx = _x + dx[i]
             if 0 <= yy < N and 0 <= xx < N and visit[yy][xx] == 0 and Map[yy][xx] > h :
                 visit[yy][xx] = 1
                 dq.append((yy, xx))
-
-
 
 for h in range(max(map(max, Map))):
     cnt = 0
