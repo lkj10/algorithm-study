@@ -25,6 +25,7 @@ for _ in range(M):
             List[num] = 0
         else:
             List[num] = 1
+
     if cmd[0] == "all":
         List = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
